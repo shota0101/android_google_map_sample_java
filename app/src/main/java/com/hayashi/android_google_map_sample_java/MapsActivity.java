@@ -1,5 +1,6 @@
 package com.hayashi.android_google_map_sample_java;
 
+import android.graphics.Color;
 import android.support.v4.app.FragmentActivity;
 import android.os.Bundle;
 
@@ -10,6 +11,10 @@ import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
+import com.google.android.gms.maps.model.Polygon;
+import com.google.android.gms.maps.model.PolygonOptions;
+import com.google.android.gms.maps.model.Polyline;
+import com.google.android.gms.maps.model.PolylineOptions;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -41,11 +46,22 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         // Add a marker in Osaka Station and move the camera
         LatLng latLng = new LatLng(34.702485, 135.495951);
-
         MarkerOptions markerOptions = new MarkerOptions();
         markerOptions.position(latLng);
         markerOptions.title("Osaka Station");
         mMap.addMarker(markerOptions);
+
+        LatLng latLng2 = new LatLng(34.705045, 135.498401);
+        MarkerOptions markerOptions2 = new MarkerOptions();
+        markerOptions2.position(latLng2);
+        markerOptions2.title("Umeda Station");
+        mMap.addMarker(markerOptions2);
+
+        PolylineOptions polylineOptions = new PolylineOptions();
+        polylineOptions.add(latLng)
+                .add(latLng2);
+        polylineOptions.color(Color.RED);
+        mMap.addPolyline(polylineOptions);
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
                 latLng,
