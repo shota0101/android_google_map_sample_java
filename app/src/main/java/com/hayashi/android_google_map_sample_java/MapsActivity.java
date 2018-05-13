@@ -9,12 +9,14 @@ import com.google.android.gms.maps.CameraUpdateFactory;
 import com.google.android.gms.maps.GoogleMap;
 import com.google.android.gms.maps.OnMapReadyCallback;
 import com.google.android.gms.maps.SupportMapFragment;
+import com.google.android.gms.maps.model.Cap;
 import com.google.android.gms.maps.model.LatLng;
 import com.google.android.gms.maps.model.MarkerOptions;
 import com.google.android.gms.maps.model.Polygon;
 import com.google.android.gms.maps.model.PolygonOptions;
 import com.google.android.gms.maps.model.Polyline;
 import com.google.android.gms.maps.model.PolylineOptions;
+import com.google.android.gms.maps.model.RoundCap;
 
 public class MapsActivity extends FragmentActivity implements OnMapReadyCallback {
 
@@ -61,7 +63,13 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
         polylineOptions.add(latLng)
                 .add(latLng2);
         polylineOptions.color(Color.RED);
-        mMap.addPolyline(polylineOptions);
+        Polyline polyline = mMap.addPolyline(polylineOptions);
+
+        // 直前の色を変更
+        polyline.setColor(Color.parseColor("#6495ed"));
+        // 直前に丸みを付ける
+        polyline.setStartCap(new RoundCap());
+        polyline.setEndCap(new RoundCap());
 
         CameraUpdate cameraUpdate = CameraUpdateFactory.newLatLngZoom(
                 latLng,
